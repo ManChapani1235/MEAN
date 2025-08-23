@@ -1,0 +1,28 @@
+<h2>All Food Items</h2>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let food of foodList">
+      <td>
+        <img [src]="'http://localhost:4000/images/' + food.image" width="80" height="60" />
+      </td>
+      <td>{{ food.name }}</td>
+      <td>{{ food.description }}</td>
+      <td>{{ food.category }}</td>
+      <td>₹{{ food.price }}</td>
+      <td>
+        <button (click)="deleteFood(food._id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

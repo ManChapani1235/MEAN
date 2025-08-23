@@ -1,0 +1,9 @@
+<!-- src/app/auth/login/login.component.html -->
+<h2>Login</h2>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <input formControlName="email" placeholder="Email" type="email" />
+  <input formControlName="password" placeholder="Password" type="password" />
+  <button type="submit">Login</button>
+  <p *ngIf="errorMessage" style="color:red">{{ errorMessage }}</p>
+  <p>Don't have an account? <a routerLink="/register">Register</a></p>
+</form>

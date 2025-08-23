@@ -1,0 +1,35 @@
+<div class="orders-container">
+  <h2>Orders</h2>
+
+  <div *ngIf="orders.length === 0" class="no-orders">
+    No orders available.
+  </div>
+
+  <div class="order-card" *ngFor="let order of orders">
+    <div><strong>Order ID:</strong> {{ order._id }}</div>
+    <div><strong>Name:</strong> {{ order.firstName }} {{ order.lastName }}</div>
+    <div><strong>Phone:</strong> {{ order.phone }}</div>
+    <div><strong>Address:</strong>  {{ order.address.street }}, {{ order.address.city }}, {{ order.address.state }}, {{ order.address.zipCode }}    </div>
+
+    <div class="order-items">
+      <strong>Items:</strong>
+      <ul>
+        <li *ngFor="let item of order.items">
+          {{ item.name }} × {{ item.quantity }}
+        </li>
+      </ul>
+    </div>
+
+    <div><strong>Total:</strong> ₹{{ order.amount }}</div>
+
+    <div class="order-status">
+      <label>Status:</label>
+      <select [(ngModel)]="order.status" (change)="updateStatus(order._id, order.status)">
+        <option value="pending">Pending</option>
+        <option value="preparing">Preparing</option>
+        <option value="out_for_delivery">Out for Delivery</option>
+        <option value="delivered">Delivered</option>
+      </select>
+    </div>
+  </div>
+</div>

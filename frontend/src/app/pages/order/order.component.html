@@ -1,0 +1,32 @@
+<!-- src/app/pages/order/order.component.html -->
+<app-navbar></app-navbar>
+<div class="order-container">
+  <h2>Checkout</h2>
+
+  <form (ngSubmit)="proceedToPayment()" #orderForm="ngForm">
+    <div class="form-row">
+      <input name="firstName" [(ngModel)]="orderData.firstName" required placeholder="First Name" />
+      <input name="lastName" [(ngModel)]="orderData.lastName" required placeholder="Last Name" />
+    </div>
+
+    <input name="email" [(ngModel)]="orderData.email" required placeholder="Email" />
+    <input name="phone" [(ngModel)]="orderData.phone" required placeholder="Phone" />
+    <input name="country" [(ngModel)]="orderData.country" required placeholder="Country" />
+
+    <h3>Shipping Address</h3>
+    <input name="street" [(ngModel)]="orderData.address.street" required placeholder="Street Address" />
+    <input name="city" [(ngModel)]="orderData.address.city" required placeholder="City" />
+    <input name="state" [(ngModel)]="orderData.address.state" required placeholder="State" />
+    <input name="zipCode" [(ngModel)]="orderData.address.zipCode" required placeholder="ZIP Code" />
+
+    <h3>Order Summary</h3>
+    <div *ngFor="let item of cartItems">
+      {{ item.name }} x {{ item.quantity }} - ₹{{ item.price * item.quantity }}
+    </div>
+    <p><strong>Total: ₹{{ totalAmount }}</strong></p>
+
+    <button type="submit">Proceed to Payment</button>
+
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </form>
+</div>

@@ -1,0 +1,10 @@
+<!-- src/app/auth/register/register.component.html -->
+<h2>Register</h2>
+<form [formGroup]="registerForm" (ngSubmit)="register()">
+  <input formControlName="name" placeholder="Name" type="text" />
+  <input formControlName="email" placeholder="Email" type="email" />
+  <input formControlName="password" placeholder="Password" type="password" />
+  <button type="submit">Register</button>
+  <p *ngIf="errorMessage" style="color:red">{{ errorMessage }}</p>
+  <p>Already have an account? <a routerLink="/login">Login</a></p>
+</form>

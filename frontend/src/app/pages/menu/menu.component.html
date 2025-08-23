@@ -1,0 +1,45 @@
+<section class="menu-section">
+  <h2 class="menu-title">Explore our menu</h2>
+  <p class="menu-description">
+    Choose from a diverse menu featuring a delectable array of dishes crafted with the finest ingredients and culinary expertise.
+  </p>
+
+  <div class="menu-categories">
+    <div
+      class="category"
+      *ngFor="let category of categories"
+      [class.active]="selectedCategory === category"
+      (click)="selectCategory(category)"
+    >
+      <img [src]="getCategoryImage(category)" [alt]="category" />
+      <span>{{ category }}</span>
+    </div>
+  </div>
+
+  <div class="selected-category" *ngIf="selectedCategory !== 'All'">
+    Showing: <strong>{{ selectedCategory }}</strong>
+    <button (click)="selectCategory('All')">Show All</button>
+  </div>
+
+  <div class="menu-container">
+    <div class="food-card" *ngFor="let food of filteredFoodList">
+      <img [src]="getImageUrl(food.image)" alt="{{ food.name }}" />
+      <div class="content">
+        <h3>{{ food.name }}</h3>
+        <div class="stars">★★★★☆</div>
+        <p>{{ food.description }}</p>
+        <h4>₹{{ food.price }}</h4>
+
+        <div class="counter" *ngIf="food.quantity && food.quantity > 0; else addButton">
+          <button (click)="decrement(food)">−</button>
+          <span>{{ food.quantity }}</span>
+          <button (click)="increment(food)">+</button>
+        </div>
+
+        <ng-template #addButton>
+          <button class="add-btn" (click)="increment(food)">+</button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</section>

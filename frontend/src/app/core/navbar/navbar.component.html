@@ -1,0 +1,21 @@
+<nav class="navbar">
+<ul>
+    <li><a routerLink="/" routerLinkActive="active">Home</a></li>
+    <li><a routerLink="/menu" routerLinkActive="active">Menu</a></li>
+    <li><a routerLink="#" routerLinkActive="active">About</a></li>
+    <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+
+    <li><a routerLink="/cart" routerLinkActive="active">🛒 Cart</a></li>
+  </ul>
+
+
+  <div class="auth-buttons">
+    <ng-container *ngIf="!isLoggedIn; else logoutBtn">
+      <button (click)="router.navigate(['/login'])">Login</button>
+      <button (click)="router.navigate(['/register'])">Sign Up</button>
+    </ng-container>
+    <ng-template #logoutBtn>
+      <button (click)="logout()">Logout</button>
+    </ng-template>
+  </div>
+</nav>
