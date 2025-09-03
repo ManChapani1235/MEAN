@@ -18,11 +18,12 @@ const cartItemSchema = new mongoose.Schema({
 // Define the user schema
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   cartData:[{
-    itemId: Array, // or the type of the itemId
-    quantity: Number
+    // Match controller usage where itemId is compared as string
+    itemId: { type: String, required: true },
+    quantity: { type: Number, required: true, default: 1 }
   }], // Array of cart items
 });
 

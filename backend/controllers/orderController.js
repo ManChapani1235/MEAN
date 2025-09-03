@@ -7,6 +7,25 @@ const placeOrder = async (req, res) => {
   try {
     const { firstName, lastName, email, phone, country, address, items, amount } = req.body;
 
+    // Normalize and validate address to match schema shape
+    const normalizedAddress = address && typeof address === 'object'
+      ? {
+          street: address.street,
+          city: address.city,
+          state: address.state,
+          zipCode: address.zipCode,
+        }
+      : {
+          street: req.body.street,
+          city: req.body.city,
+          state: req.body.state,
+          zipCode: req.body.zipCode,
+        };
+
+    if (!normalizedAddress.street || !normalizedAddress.city || !normalizedAddress.state || !normalizedAddress.zipCode) {
+      return res.status(400).json({ success: false, message: "Invalid address. street, city, state, zipCode are required." });
+    }
+
     // Generate a unique orderId
     const orderId = uuidv4();
 
@@ -18,7 +37,7 @@ const placeOrder = async (req, res) => {
       email,
       phone,
       country,
-      address,
+      address: normalizedAddress,
       items,
       amount,
     });
